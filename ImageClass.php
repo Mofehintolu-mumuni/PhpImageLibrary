@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * 
+ * @author Mofehintolu MUMUNI
+ * THIS SCRIPT IS THE PRIVATE AND
+ * INTELLECTUAL PROPERTY OF THE ABOVE NAMED AUTHOR Mofehintolu MUMUNI
+ * REPRODUCTION OR USE OF ANY PART OF THIS SOFTWARE CODE WITHOUT 
+ * THE APPROVAL OF THE AUTHOR IS HIGHLY PROHIBITED AND CONSIDERED A CASE OF THEFT
+ * THE AUTHOR Mofehintolu MUMUNI RESERVES THE RIGHT TO SUE ANY INDIVIDUAL THAT IS FOUND GUILTY.
+ * 
+ * @copyright 2018
+ */
 
  namespace library\Image;
 
@@ -147,11 +157,15 @@
     
     function UploadImage($imageType)
     {
-        if(!defined('IMAGE_DESTINATION'))
+        /*if(!defined('IMAGE_DESTINATION'))
         {
             define('IMAGE_DESTINATION',$this->SaveImageToFolderPath);
         }
-         
+       */  
+         //set image destination constant value to a variable not a constant for 
+         //multiple destination use cases
+          
+    $IMAGE_DESTINATION = $this->SaveImageToFolderPath;
   
    	switch($imageType){
 	   
@@ -169,16 +183,16 @@
 
         //check if file exists since image path is not null
                 if($this->ImagePathFromDb != "null"){
-                    $check = file_exists(IMAGE_DESTINATION.$this->ImagePathFromDb);
+                    $check = file_exists($IMAGE_DESTINATION.$this->ImagePathFromDb);
                     if($check){
                         
                         //use unlink to delete old image file if it exists
                         
-                        unlink(IMAGE_DESTINATION.$this->ImagePathFromDb);
+                        unlink($IMAGE_DESTINATION.$this->ImagePathFromDb);
                         
                         //save image to specified folder using imagejpeg
                         
-                        imagejpeg($true_color_jpeg,IMAGE_DESTINATION.$this->NewImageName.'.jpg',100);
+                        imagejpeg($true_color_jpeg,$IMAGE_DESTINATION.$this->NewImageName.'.jpg',100);
                         
                         //destroy image to free up memory
                         imagedestroy($true_color_jpeg);
@@ -212,7 +226,7 @@
       }
                 
       if($this->ImagePathFromDb == "null"){
-      imagejpeg($true_color_jpeg,IMAGE_DESTINATION.$this->NewImageName.'.jpg',100);
+      imagejpeg($true_color_jpeg,$IMAGE_DESTINATION.$this->NewImageName.'.jpg',100);
                         
       //destroy image to free up memory
       imagedestroy($true_color_jpeg);
@@ -246,18 +260,18 @@
 
         //check if file exists since image path is not null
                 if($this->ImagePathFromDb != "null"){
-                    $check = file_exists(IMAGE_DESTINATION.$this->ImagePathFromDb);
+                    $check = file_exists($IMAGE_DESTINATION.$this->ImagePathFromDb);
                     if($check){
                         
                         //use unlink to delete old image file if it exists
                         
-                        unlink(IMAGE_DESTINATION.$this->ImagePathFromDb);
+                        unlink($IMAGE_DESTINATION.$this->ImagePathFromDb);
                         
                         //header("Content-Type: image/png");
                         
                         //save image to specified folder using imagejpeg
                         
-                        ImageJPEG($true_color_png,IMAGE_DESTINATION.$this->NewImageName.'.png',100);
+                        ImageJPEG($true_color_png,$IMAGE_DESTINATION.$this->NewImageName.'.png',100);
                         
                         //destroy image to free up memory
                         imagedestroy($true_color_png);
@@ -294,7 +308,7 @@
         
       //header("Content-Type: image/png");
           
-      ImageJPEG($true_color_png,IMAGE_DESTINATION.$this->NewImageName.'.png',100);
+      ImageJPEG($true_color_png,$IMAGE_DESTINATION.$this->NewImageName.'.png',100);
                         
       //destroy image to free up memory
       imagedestroy($true_color_png);
@@ -314,7 +328,8 @@
 
     
 	default: 
-    echo"Images must be of JPG, JPEG or PNG formats only";
+    echo"<script> var picupload_var = setInterval(function(){generate_alert('Images must be of JPG, JPEG or PNG formats only', 'info', 'red');}, 1000); 
+        setTimeout(function(){cancel_timed_alert('info', picupload_var);}, 10000);</script>";
     
 	break;
     
@@ -337,11 +352,27 @@
     
     
     
+    
+    
+    
+    
+    
 
+    
+    
+    function getfilename()
+    {
+        echo $this->Filename;
+    }
+    
+    
+    
+    
   }
 
     
-
+    
+    
 
 
 ?>
